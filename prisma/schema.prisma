@@ -17,6 +17,7 @@ model User {
   updatedAt             DateTime   @updatedAt
   accounts              Account[]
   sessions              Session[]
+  stripeCustomerId      String?
   @@map("users")
 }
 model Account {
