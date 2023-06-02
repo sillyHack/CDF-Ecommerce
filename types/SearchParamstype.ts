@@ -8,7 +8,8 @@ type SearchParams = {
     unit_amount: number | null,
     image: string,
     description: string | null,
-    features: string
+    features: string,
+    quantity: number | 1
 }
 
 export type SearchParamsType = {

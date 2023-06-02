@@ -2,6 +2,7 @@ import { SearchParamsType } from "@/types/SearchParamstype"
 import formatPrice from "@/util/PriceFormat"
 import { deepStrictEqual } from "assert"
 import Image from "next/image"
+import AddCart from "./AddCart"
 
 export default async function Product({searchParams}: SearchParamsType){
     return(
@@ -16,7 +17,7 @@ export default async function Product({searchParams}: SearchParamsType){
                     <p className="font-bold text-pink-700">{searchParams.unit_amount && formatPrice(searchParams.unit_amount)}</p>
                 </div>
 
-                <button className="my-12 text-white py-2 px-6 font-medium rounded-md bg-pink-700">Ajouter au panier</button>
+                <AddCart {...searchParams}/>
             </div>
         </div>
     )
