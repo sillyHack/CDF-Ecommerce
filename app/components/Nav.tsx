@@ -3,11 +3,12 @@
 import { Session } from "next-auth"
 import { signIn } from "next-auth/react"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Nav({user} : Session) { // we are saying the user here has a type of Session
     return (
         <nav className="flex justify-between items-center py-8">
-            <h1>CDF</h1>
+            <Link href={"/"}><h1>CDF</h1></Link>
             <ul className="flex items-center gap-12">
                 {/* If the user isn't signed in */}
                 {!user && (
