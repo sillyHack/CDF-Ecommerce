@@ -8,6 +8,7 @@ const prisma = new PrismaClient()
 
 export const authOptions = {
     adapter: PrismaAdapter(prisma),
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string, // we use "as string" bcz TypeScript consider variables from .env file as potentially undefined and we to tell that it's fine, we are sure that the values are not undefined
