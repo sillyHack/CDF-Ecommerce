@@ -2,15 +2,19 @@ import { create } from "zustand";
 import {persist} from "zustand/middleware";
 import { AddCartType } from "./types/AddCartType";
 
-type CartSate = {
+type CartState = {
     isOpen: boolean,
     cart: AddCartType[],
     toggleCart: () => void,
     addProduct: (item: AddCartType) => void,
-    removeProduct: (item: AddCartType) => void
+    removeProduct: (item: AddCartType) => void,
+    paymentIntent: string,
+    setPaymentIntent: (val: string) => void,
+    onCheckout: string, // used to display the checkout page or the cart page in the location(like a toggle effect)
+    setOnCheckout: (val: string) => void
 }
 
-export const useCartStore = create<CartSate>()(
+export const useCartStore = create<CartState>()(
     persist(
         (set) => ({
             cart: [],
@@ -47,7 +51,11 @@ export const useCartStore = create<CartSate>()(
                     const filteredCart = state.cart.filter((cartItem) => cartItem.id !== item.id)
                     return {cart: filteredCart}
                 }
-            })
+            }),
+            paymentIntent: "",
+            setPaymentIntent: (val) => set((state) => ({paymentIntent: val})),
+            onCheckout: "cart",
+            setOnCheckout: (val) => set((state) => ({onCheckout: val}))
         }),
         {name: "cart-store"}
     )

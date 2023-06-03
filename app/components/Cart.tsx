@@ -32,7 +32,7 @@ export default function Cart(){
                     // 'layout' property allows us to nicely remove any children from the list
                     <motion.div layout key={item.id} className="flex py-4 gap-4">
                         <Image className="rounded-md h-24 object-cover" src={item.image} alt={item.name} width={100} height={100}/>
-                        <div>
+                        <motion.div layout>
                             <h2>{item.name}</h2>
 
                             {/* update the product quantity */}
@@ -43,7 +43,7 @@ export default function Cart(){
                             </div>
 
                             <p className="text-sm">{item.unit_amount && formatPrice(item.unit_amount)}</p>
-                        </div>
+                        </motion.div>
                     </motion.div>
                 ))}
                 {/* Not empty cart */}
