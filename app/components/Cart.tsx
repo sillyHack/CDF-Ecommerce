@@ -15,16 +15,19 @@ export default function Cart(){
         return acc + item.unit_amount! * item.quantity
     }, 0)
     return(
+        // Background
         <motion.div 
             animate={{opacity: 1, x: -5}}
             initial={{opacity: 0, x: 0}}
             exit={{opacity: 0, x: 0}}
             onClick={cartStore.toggleCart} 
-            className="fixed w-full h-screen left-0 top-0 bg-black/25">
+            className="fixed w-full h-screen left-0 top-0 bg-black/25"
+        >
+            {/* Our cart */}
             {/* if we click on this div, the cart will be toggled as well the parent propagate the onclick to the children */}
             {/* To stop that, we the stopPropagation() method on the children to not toggle when we click on them */}
-            <motion.div layout onClick={(e) => e.stopPropagation()} className="bg-white absolute right-0 top-0 w-1/4 h-screen p-12 overflow-y-auto text-gray-700">
-                <h1 className="text-lg font-bold">Panier</h1>
+            <motion.div layout onClick={(e) => e.stopPropagation()} className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-auto text-gray-700 w-full lg:w-2/5">
+                <button className="text-lg font-bold" onClick={cartStore.toggleCart}>Continuer mes achats 🏃‍♂️</button>
                 {cartStore.cart.map((item) => (
                     // 'layout' property allows us to nicely remove any children from the list
                     <motion.div layout key={item.id} className="flex py-4 gap-4">
