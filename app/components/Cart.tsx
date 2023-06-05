@@ -6,6 +6,7 @@ import formatPrice from "@/util/PriceFormat"
 import {IoAddCircle, IoRemoveCircle} from "react-icons/io5"
 import basket from "@/public/basket.png"
 import {motion, AnimatePresence} from "framer-motion"
+import Checkout from "./Checkout"
 
 export default function Cart(){
     const cartStore = useCartStore()
@@ -28,32 +29,41 @@ export default function Cart(){
             {/* To stop that, we the stopPropagation() method on the children to not toggle when we click on them */}
             <motion.div layout onClick={(e) => e.stopPropagation()} className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-auto text-gray-700 w-full lg:w-2/5">
                 <button className="text-lg font-bold" onClick={cartStore.toggleCart}>Continuer mes achats 🏃‍♂️</button>
-                {cartStore.cart.map((item) => (
-                    // 'layout' property allows us to nicely remove any children from the list
-                    <motion.div layout key={item.id} className="flex py-4 gap-4">
-                        <Image className="rounded-md h-24 object-cover" src={item.image} alt={item.name} width={100} height={100}/>
-                        <motion.div layout>
-                            <h2>{item.name}</h2>
 
-                            {/* update the product quantity */}
-                            <div className="flex gap-2 items-center justify-center">
-                                <h2>Quantité: {item.quantity}</h2>
-                                <IoRemoveCircle className="cursor-pointer" onClick={() => cartStore.removeProduct(item)}/>
-                                <IoAddCircle className="cursor-pointer" onClick={() => cartStore.addProduct(item)}/>
-                            </div>
+                {/* Cart items */}
+                {cartStore.onCheckout === "cart" && (
+                    <>
+                        {cartStore.cart.map((item) => (
+                            // 'layout' property allows us to nicely remove any children from the list
+                            <motion.div layout key={item.id} className="flex py-4 gap-4">
+                                <Image className="rounded-md h-24 object-cover" src={item.image} alt={item.name} width={100} height={100}/>
+                                <motion.div layout>
+                                    <h2>{item.name}</h2>
 
-                            <p className="text-sm">{item.unit_amount && formatPrice(item.unit_amount)}</p>
-                        </motion.div>
-                    </motion.div>
-                ))}
+                                    {/* update the product quantity */}
+                                    <div className="flex gap-2 items-center justify-center">
+                                        <h2>Quantité: {item.quantity}</h2>
+                                        <IoRemoveCircle className="cursor-pointer" onClick={() => cartStore.removeProduct(item)}/>
+                                        <IoAddCircle className="cursor-pointer" onClick={() => cartStore.addProduct(item)}/>
+                                    </div>
+
+                                    <p className="text-sm">{item.unit_amount && formatPrice(item.unit_amount)}</p>
+                                </motion.div>
+                            </motion.div>
+                        ))}
+                    </>
+                )}
                 {/* Not empty cart */}
                 {   cartStore.cart.length > 0 && 
                     <div>
-                        {/* total price */}
+                        {/* total price and checkout */}
                         <p>Total: {formatPrice(totalPrice)}</p>
-                        <button className="py-2 mt-4 w-full bg-pink-700 rounded-md text-white hover:bg-pink-500 transition">Valider et payer</button>
+                        <button onClick={() => cartStore.setOnCheckout("checkout")} className="py-2 mt-4 w-full bg-pink-700 rounded-md text-white hover:bg-pink-500 transition">Valider et payer</button>
                     </div>
                 }
+
+                {/* checkout form */}
+                {cartStore.onCheckout === "checkout" && <Checkout />}
 
                 {/* Empty cart */}
                 <AnimatePresence>

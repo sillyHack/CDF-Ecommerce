@@ -29,7 +29,7 @@ export default function Nav({user} : Session) { // we are saying the user here h
                 {/* If the user isn't signed in */}
                 {!user && (
                     <li>
-                        <button className="bg-pink-700 text-white py-2 px-4 rounded-md" onClick={() => signIn()}>Se connecter</button>
+                        <button className="bg-pink-700 text-white py-2 px-4 rounded-md hover:bg-pink-500 transition" onClick={() => signIn()}>Se connecter</button>
                     </li>
                 )}
                 {/* If the use is signed in */}
