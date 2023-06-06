@@ -5,6 +5,7 @@ import { Elements } from "@stripe/react-stripe-js"
 import { useCartStore } from "@/store"
 import {useState, useEffect} from "react"
 import { useRouter } from "next/navigation"
+import CheckoutForm from "./CheckoutForm"
 
 // when we wanna fetch smth from the client with process.env, we have to prefix the variable with NEXT_PUBLIC
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
@@ -12,7 +13,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 export default function Checkout(){
     const cartStore = useCartStore()
     const router = useRouter()
-    const [clientSecret, setClientSecret] = useState("")
+    const [clientSecret, setClientSecret] = useState("") // the client secret is used to authorize a payment 
 
     useEffect(() => {
         // create a payment intent as soon as the page loads up
@@ -35,9 +36,23 @@ export default function Checkout(){
         })
     }, [])
 
+    const options: StripeElementsOptions = {
+        clientSecret,
+        appearance: {
+            theme: "stripe",
+            labels: "floating"
+        }
+    }
+
     return(
         <div>
-            <h1>Checkout</h1>
+            {clientSecret && (
+                <div>
+                    <Elements options={options} stripe={stripePromise}>
+                        <CheckoutForm clientSecret={clientSecret}/>
+                    </Elements>
+                </div>
+            )}
         </div>
     )
 }

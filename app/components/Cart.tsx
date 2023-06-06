@@ -28,7 +28,14 @@ export default function Cart(){
             {/* if we click on this div, the cart will be toggled as well the parent propagate the onclick to the children */}
             {/* To stop that, we the stopPropagation() method on the children to not toggle when we click on them */}
             <motion.div layout onClick={(e) => e.stopPropagation()} className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-auto text-gray-700 w-full lg:w-2/5">
-                <button className="text-lg font-bold" onClick={cartStore.toggleCart}>Continuer mes achats 🏃‍♂️</button>
+                
+                {cartStore.onCheckout === "cart" && (
+                    <button className="text-lg font-bold" onClick={cartStore.toggleCart}>Continuer mes achats 🏃‍♂️</button>
+                )}
+
+                {cartStore.onCheckout === "checkout" && (
+                    <button className="text-lg font-bold" onClick={() => cartStore.setOnCheckout("cart")}>Voir le panier 🛒</button>
+                )}
 
                 {/* Cart items */}
                 {cartStore.onCheckout === "cart" && (
@@ -54,12 +61,15 @@ export default function Cart(){
                     </>
                 )}
                 {/* Not empty cart */}
-                {   cartStore.cart.length > 0 && 
-                    <div>
-                        {/* total price and checkout */}
-                        <p>Total: {formatPrice(totalPrice)}</p>
-                        <button onClick={() => cartStore.setOnCheckout("checkout")} className="py-2 mt-4 w-full bg-pink-700 rounded-md text-white hover:bg-pink-500 transition">Valider et payer</button>
-                    </div>
+                {/* On n'affiche pas le bouton lorsque l'on dans la page de paiement */}
+                {   cartStore.cart.length > 0 && cartStore.onCheckout === "cart" ? (  
+                        <div>
+                            {/* total price and checkout */}
+                            <p>Total: {formatPrice(totalPrice)}</p>
+                            <button onClick={() => cartStore.setOnCheckout("checkout")} className="py-2 mt-4 w-full bg-pink-700 rounded-md text-white hover:bg-pink-500 transition">Procéder au paiement</button>
+                        </div>)
+                        : 
+                        null
                 }
 
                 {/* checkout form */}
