@@ -65,6 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             })
             if(!existing_order){
                 res.status(400).json({message: "Invalid payment intent"})
+                return
             }
 
             // update existing order
