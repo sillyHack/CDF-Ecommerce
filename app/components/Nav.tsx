@@ -34,14 +34,16 @@ export default function Nav({user} : Session) { // we are saying the user here h
                 )}
                 {/* If the use is signed in */}
                 {user && (
-                    <li>
-                        <Image 
-                            src={user?.image as string} 
-                            alt={user?.name as string} 
-                            width={35} 
-                            height={35}
-                            className="rounded-full"/>
-                    </li>
+                    <Link href={'/dashboard'}>
+                        <li>
+                            <Image 
+                                src={user?.image as string} 
+                                alt={user?.name as string} 
+                                width={35} 
+                                height={35}
+                                className="rounded-full"/>
+                        </li>
+                    </Link>
                 )}
             </ul>
             <AnimatePresence>
