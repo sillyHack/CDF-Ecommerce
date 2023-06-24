@@ -6,6 +6,7 @@ import { useCartStore } from "@/store"
 import {useState, useEffect} from "react"
 import { useRouter } from "next/navigation"
 import CheckoutForm from "./CheckoutForm"
+import OrderAnimation from "./OrderAnimation"
 
 // when we wanna fetch smth from the client with process.env, we have to prefix the variable with NEXT_PUBLIC
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
@@ -46,6 +47,8 @@ export default function Checkout(){
 
     return(
         <div>
+            {/* Animation during loading of client secret */}
+            {!clientSecret && <OrderAnimation />}
             {clientSecret && (
                 <div>
                     <Elements options={options} stripe={stripePromise}>

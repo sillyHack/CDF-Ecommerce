@@ -22,7 +22,11 @@ export default function Cart(){
             animate={{opacity: 1, x: -5}}
             initial={{opacity: 0, x: 0}}
             exit={{opacity: 0, x: 0}}
-            onClick={cartStore.toggleCart} 
+            onClick={() => {
+                cartStore.toggleCart();
+                // we put the state on 'cart' when we close the cart in order to avoid the automatic lottie play when we return
+                cartStore.setOnCheckout("cart");
+            }}
             className="fixed w-full h-screen left-0 top-0 bg-black/25"
         >
             {/* Our cart */}
