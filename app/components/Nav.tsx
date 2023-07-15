@@ -27,14 +27,14 @@ export default function Nav({user} : Session) { // we are saying the user here h
                         )}
                     </AnimatePresence>
                 </li>
+                {/* Dark and light mode control */}
+                <DarkLight />
                 {/* If the user isn't signed in */}
                 {!user && (
                     <li>
                         <button className="bg-primary text-white py-2 px-4 rounded-md hover:bg-pink-500 transition" onClick={() => signIn()}>Se connecter</button>
                     </li>
                 )}
-                {/* Dark and light mode control */}
-                <DarkLight />
                 {/* If the use is signed in */}
                 {user && (
                     <li>
