@@ -5,7 +5,7 @@ import formatPrice from "@/util/PriceFormat";
 import Image from "next/image";
 
 // everytime a user visit this page, we revalidate it(means that we do a refresh to get the right data)
-export const revalidate = 0.01;
+export const revalidate = 1;
 
 const fetchOrders = async() => {
     const userSession = await getServerSession(authOptions);
