@@ -45,12 +45,12 @@ export default function CheckoutForm({clientSecret}: {clientSecret: string}){
     }
 
     return(
-        <form className="text-gray-600" onSubmit={handleSubmit} id="payment-form">
+        <form onSubmit={handleSubmit} id="payment-form">
             <PaymentElement id="payment-element" options={{layout: "tabs"}}/>
             <h1 className="py-4 text-sm font-bold">Total: {formattedPrice}</h1>
-            <button className="py-2 mt-4 w-full bg-pink-700 rounded-md text-white hover:bg-pink-500 transition disabled:opacity-25" id="submit" disabled={isLoading || !stripe || !elements}>
+            <button className="mt-4 w-full btn btn-primary text-white disabled:opacity-25" id="submit" disabled={isLoading || !stripe || !elements}>
                 <span id="button-text">
-                    {isLoading ? <span>Traitement 👀</span> : <span>Payer 🔥</span>}
+                    {isLoading ? <span className="text-black text-opacity-75">Traitement 👀</span> : <span>Payer 🔥</span>}
                 </span>
             </button>
         </form>

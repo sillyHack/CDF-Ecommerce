@@ -36,7 +36,7 @@ export default function OrderConfirmed(){
                 <Image src={congrats} alt="cheers" className="py-8"/>
                 <div className="flex items-center justify-center gap-12">
                     <Link href={'/dashboard'}>
-                        <button className="py-2 px-2 mt-4 w-full bg-pink-700 rounded-md text-white hover:bg-pink-500 transition" onClick={checkoutOrder}>Vérifier la commande</button>
+                        <button className="mt-4 w-full btn btn-primary text-white" onClick={checkoutOrder}>Vérifier la commande</button>
                     </Link>
                 </div>
             </div>

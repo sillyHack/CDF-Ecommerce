@@ -23,7 +23,7 @@ export default async function RootLayout({
   console.log(session)
 
   return (
-    <html lang="en">
+    <html lang="en" data-theme="cupcake">
       <body className={`mx-4 lg:mx-48 min-h-screen ${roboto.className}`}>
         <Hydrate>
           <Nav user={session?.user} expires={session?.expires as string}/>

@@ -2,13 +2,25 @@
 
 import { useCartStore } from "@/store"
 import { AddCartType } from "@/types/AddCartType"
+import { useState } from "react";
 
 export default function AddCart({name, id, image, unit_amount, quantity}: AddCartType){
     const cartStore = useCartStore();
+    const [added, setAdded] = useState(false);
+
+    const handleAddToCart = () => {
+        cartStore.addProduct({id, image, name, unit_amount, quantity})
+        setAdded(true);
+        setTimeout(() => {
+            setAdded(false);
+        }, 500);
+    }
 
     return(
         <>
-            <button onClick={() => cartStore.addProduct({id, image, name, unit_amount, quantity})} className="my-12 text-white py-2 px-6 font-medium rounded-md bg-pink-700 hover:bg-pink-500 transition">Ajouter au panier</button>
+            <button onClick={handleAddToCart} disabled={added} className="my-4 w-full btn btn-primary text-white">
+                {!added ? "Ajouter au panier" : "Ajout en cours.."}
+            </button>
         </>
     )
 }

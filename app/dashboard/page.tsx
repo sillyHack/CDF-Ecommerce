@@ -38,7 +38,7 @@ export default async function Dashboard(){
             <h1>Mes commandes</h1>
             <div className="font-medium">
                 {orders.map((order) => (
-                    <div key={order.id} className="rounded-lg p-8 my-12">
+                    <div key={order.id} className="rounded-lg p-8 my-12 bg-base-200">
                         <h2 className="text-xs font-medium">Référence de la commande: {order.id}</h2>
                         <p className="text-xs">
                             Statut: 

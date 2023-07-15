@@ -3,7 +3,7 @@
 import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
 import { useCartStore } from "@/store"
-import {useState, useEffect} from "react"
+import {useState, useEffect, useLayoutEffect} from "react"
 import { useRouter } from "next/navigation"
 import CheckoutForm from "./CheckoutForm"
 import OrderAnimation from "./OrderAnimation"
@@ -16,7 +16,7 @@ export default function Checkout(){
     const router = useRouter()
     const [clientSecret, setClientSecret] = useState("") // the client secret is used to authorize a payment 
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         // create a payment intent as soon as the page loads up
         fetch("/api/create-payment-intent", {
             method: "POST",
@@ -49,6 +49,7 @@ export default function Checkout(){
         <div>
             {/* Animation during loading of client secret */}
             {!clientSecret && <OrderAnimation />}
+            
             {clientSecret && (
                 <div>
                     <Elements options={options} stripe={stripePromise}>

@@ -32,7 +32,7 @@ export default function Cart(){
             {/* Our cart */}
             {/* if we click on this div, the cart will be toggled as well the parent propagate the onclick to the children */}
             {/* To stop that, we the stopPropagation() method on the children to not toggle when we click on them */}
-            <motion.div layout onClick={(e) => e.stopPropagation()} className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-auto text-gray-700 w-full lg:w-2/5">
+            <motion.div layout onClick={(e) => e.stopPropagation()} className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-auto w-full lg:w-2/5">
                 
                 {cartStore.onCheckout === "cart" && (
                     <button className="text-lg font-bold" onClick={cartStore.toggleCart}>Continuer mes achats 🏃‍♂️</button>
@@ -71,7 +71,7 @@ export default function Cart(){
                         <div>
                             {/* total price and checkout */}
                             <p>Total: {formatPrice(totalPrice)}</p>
-                            <button onClick={() => cartStore.setOnCheckout("checkout")} className="py-2 mt-4 w-full bg-pink-700 rounded-md text-white hover:bg-pink-500 transition">Procéder au paiement</button>
+                            <button onClick={() => cartStore.setOnCheckout("checkout")} className="py-2 mt-4 w-full btn btn-primary text-white">Procéder au paiement</button>
                         </div>)
                         : 
                         null
@@ -84,7 +84,7 @@ export default function Cart(){
                 {/* Empty cart */}
                 <AnimatePresence>
                     {
-                        !cartStore.cart.length && cartStore.onCheckout === "checkout" &&
+                        !cartStore.cart.length && cartStore.onCheckout === "cart" &&
                         <motion.div 
                             animate={{scale: 1, rotateZ: 0, opacity: 0.75}}
                             initial={{scale: 0, rotateZ: -10, opacity: 0.5}}

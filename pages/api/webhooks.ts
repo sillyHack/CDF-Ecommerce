@@ -41,7 +41,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } catch(err){
         return res.status(400).send("Webhook error.." + err)
     }
-
     
     // handle different type of stripe event
     switch(event?.type){
