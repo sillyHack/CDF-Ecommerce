@@ -5,7 +5,7 @@ import formatPrice from "@/util/PriceFormat";
 import Image from "next/image";
 
 // everytime a user visit this page, we revalidate it(means that we do a refresh to get the right data)
-export const revalidate = 0;
+export const revalidate = 0.01;
 
 const fetchOrders = async() => {
     const userSession = await getServerSession(authOptions);
@@ -27,7 +27,6 @@ const fetchOrders = async() => {
 
 export default async function Dashboard(){
     const orders = await fetchOrders();
-    
     
     if(orders === null) return <div>Veuillez vous connecter !</div>
     if(orders.length === 0) return <div>Aucune commande effectuée !</div>
