@@ -12,6 +12,10 @@ module.exports = {
         // and auto fit them in that grid.
         // When the product image gets smaller than 15rem, it gonna jump in another row and stretch it out to 1fr(all the available space)
         fluid: "repeat(auto-fit, minmax(20rem, 1fr))", 
+      },
+      fontFamily: {
+        lobster: ['var(--font-lobster)'],
+        roboto: ['var(--font-roboto)']
       }
     },
   },

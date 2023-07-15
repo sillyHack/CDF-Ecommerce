@@ -7,6 +7,7 @@ import {useState, useEffect, useLayoutEffect} from "react"
 import { useRouter } from "next/navigation"
 import CheckoutForm from "./CheckoutForm"
 import OrderAnimation from "./OrderAnimation"
+import { useThemeStore } from "@/store"
 
 // when we wanna fetch smth from the client with process.env, we have to prefix the variable with NEXT_PUBLIC
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
@@ -37,13 +38,18 @@ export default function Checkout(){
         })
     }, [])
 
+    // theme store
+    const themeStore = useThemeStore()
+
     const options: StripeElementsOptions = {
         clientSecret,
         appearance: {
-            theme: "stripe",
+            theme: themeStore.mode === "dark" ? "night" : "stripe",
             labels: "floating"
         }
     }
+
+    
 
     return(
         <div>

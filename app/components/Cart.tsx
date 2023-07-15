@@ -32,7 +32,7 @@ export default function Cart(){
             {/* Our cart */}
             {/* if we click on this div, the cart will be toggled as well the parent propagate the onclick to the children */}
             {/* To stop that, we the stopPropagation() method on the children to not toggle when we click on them */}
-            <motion.div layout onClick={(e) => e.stopPropagation()} className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-auto w-full lg:w-2/5">
+            <motion.div layout onClick={(e) => e.stopPropagation()} className="bg-base-200 absolute right-0 top-0 h-screen p-12 overflow-y-auto w-full lg:w-2/5">
                 
                 {cartStore.onCheckout === "cart" && (
                     <button className="text-lg font-bold" onClick={cartStore.toggleCart}>Continuer mes achats 🏃‍♂️</button>
@@ -47,7 +47,7 @@ export default function Cart(){
                     <>
                         {cartStore.cart.map((item) => (
                             // 'layout' property allows us to nicely remove any children from the list
-                            <motion.div layout key={item.id} className="flex py-4 gap-4">
+                            <motion.div layout key={item.id} className="flex m-4 p-4 gap-4 bg-base-300 rounded-md">
                                 <Image className="rounded-md h-24 object-cover" src={item.image} alt={item.name} width={100} height={100}/>
                                 <motion.div layout>
                                     <h2>{item.name}</h2>

@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth"; // used to get the actual user
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { Order, PrismaClient } from "@prisma/client";
+import { prisma } from "@/util/Prisma";
 import formatPrice from "@/util/PriceFormat";
 import Image from "next/image";
 
@@ -8,7 +8,6 @@ import Image from "next/image";
 export const revalidate = 0;
 
 const fetchOrders = async() => {
-    const prisma = new PrismaClient();
     const userSession = await getServerSession(authOptions);
 
     if(!userSession) return null;
@@ -51,7 +50,7 @@ export default async function Dashboard(){
                                 <div className="py-2" key={product.id}>
                                     <h2 className="py-2">{product.name}</h2>
                                     <div className="flex items-center gap-4">
-                                        <Image src={product.image!} width={36} height={36} alt={product.name}/>
+                                        <Image className="w-auto" src={product.image!} width={36} height={36} alt={product.name} priority={true}/>
                                         <p>{formatPrice(product.unit_amount)}</p>
                                         <p>Quantité: {product.quantity}</p>
                                     </div>
