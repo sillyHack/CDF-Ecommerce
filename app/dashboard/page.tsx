@@ -29,11 +29,19 @@ export default async function Dashboard(){
     const orders = await fetchOrders();
     
     if(orders === null) return <div>Veuillez vous connecter !</div>
-    if(orders.length === 0) return <div>Aucune commande effectuée !</div>
+    if(orders.length === 0) {
+        return (
+            <div>
+                Aucune commande effectuée !
+                <p className="text-xs italic">(Veuillez recharger la page si votre commande n'apparaît pas)</p>
+            </div>
+        )
+    } 
 
     return (
         <div>
             <h1>Mes commandes</h1>
+            <p className="text-xs italic">(Veuillez recharger la page si votre commande n'apparaît pas)</p>
             <div className="font-medium">
                 {orders.map((order) => (
                     <div key={order.id} className="rounded-lg p-8 my-12 bg-base-200">
