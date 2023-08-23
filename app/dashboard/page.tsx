@@ -24,7 +24,11 @@ const fetchOrders = async() => {
     return orders;
 }
 
-
+/**
+ * The dashboard that gonna display all the orders
+ * 
+ * @returns the dashboard component
+ */
 export default async function Dashboard(){
     const orders = await fetchOrders();
     
@@ -70,5 +74,5 @@ export default async function Dashboard(){
                 ))}
             </div>
         </div>
-    )
+    );
 }

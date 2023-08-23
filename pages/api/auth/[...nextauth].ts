@@ -1,9 +1,12 @@
-import NextAuth, {NextAuthOptions} from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { prisma } from "@/util/Prisma"
-import Stripe from "stripe"
+import NextAuth, {NextAuthOptions} from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { prisma } from "@/util/Prisma";
+import Stripe from "stripe";
 
+/**
+ * Informations authentification that we gonna need
+ */
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma),
     secret: process.env.NEXTAUTH_SECRET,
@@ -43,4 +46,4 @@ export const authOptions: NextAuthOptions = {
     }
 }
 
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);

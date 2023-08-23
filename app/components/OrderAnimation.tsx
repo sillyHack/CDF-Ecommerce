@@ -10,5 +10,5 @@ export default function OrderAnimation(){
             </motion.h1>
             <Player src={lottieOrder} autoplay loop/>
         </div>
-    )
+    );
 }

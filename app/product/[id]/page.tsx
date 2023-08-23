@@ -1,8 +1,13 @@
-import { SearchParamsType } from "@/types/SearchParamstype"
-import formatPrice from "@/util/PriceFormat"
-import Image from "next/image"
-import AddCart from "./AddCart"
+import { SearchParamsType } from "@/types/SearchParamstype";
+import formatPrice from "@/util/PriceFormat";
+import Image from "next/image";
+import AddCart from "./AddCart";
 
+/**
+ * The product informations page
+ * @param productSearched the product to display
+ * @returns the product informations page
+ */
 export default async function Product({searchParams}: SearchParamsType){
     return(
         <div className="flex flex-col items-center justify-between gap-24 lg:flex-row">

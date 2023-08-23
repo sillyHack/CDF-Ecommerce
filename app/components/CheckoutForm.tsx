@@ -6,41 +6,41 @@ import formatPrice from "@/util/PriceFormat"
 import { useCartStore } from "@/store"
 
 export default function CheckoutForm({clientSecret}: {clientSecret: string}){
-    const stripe = useStripe()
-    const elements = useElements()
-    const [isLoading, setIsLoading] = useState(false)
+    const stripe = useStripe();
+    const elements = useElements();
+    const [isLoading, setIsLoading] = useState(false);
     
-    const cartStore = useCartStore()
+    const cartStore = useCartStore();
 
     const totalPrice = cartStore.cart.reduce((acc, item) => {
         return acc + item.quantity * item.unit_amount!
-    }, 0)
-    const formattedPrice = formatPrice(totalPrice)
+    }, 0);
+    const formattedPrice = formatPrice(totalPrice);
 
     // we are not gonna render the form if stripe isn't initialized or if there is no client secret
     useEffect(() => {
         if(!stripe) return
         if(!clientSecret) return
-    }, [stripe])
+    }, [stripe]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         // block page refreshing
-        e.preventDefault()
+        e.preventDefault();
 
         // security check if everything is loaded up
-        if(!stripe || !elements) return
+        if(!stripe || !elements) return;
 
         // loading(that gonna disable the submit button)
-        setIsLoading(true)
+        setIsLoading(true);
 
         stripe.confirmPayment({
             elements, // here it will gonna check auto. the user card details if they are correct or not
             redirect: "if_required"
         }).then((result) => {
             if(!result.error){
-                cartStore.setOnCheckout("success")
+                cartStore.setOnCheckout("success");
             }
-            setIsLoading(false)
+            setIsLoading(false);
         })
     }
 
@@ -54,6 +54,5 @@ export default function CheckoutForm({clientSecret}: {clientSecret: string}){
                 </span>
             </button>
         </form>
-        
-    )
+    );
 }

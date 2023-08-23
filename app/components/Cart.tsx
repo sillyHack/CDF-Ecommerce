@@ -10,12 +10,12 @@ import Checkout from "./Checkout"
 import OrderConfirmed from "./OrderConfirmed"
 
 export default function Cart(){
-    const cartStore = useCartStore()
+    const cartStore = useCartStore();
 
     // total price (here 'acc' is an accumulating variable initialized by default to 0 here)
     const totalPrice = cartStore.cart.reduce((acc, item) => {
         return acc + item.unit_amount! * item.quantity
-    }, 0)
+    }, 0);
     return(
         // Background
         <motion.div 
@@ -98,5 +98,5 @@ export default function Cart(){
                 </AnimatePresence>
             </motion.div>
         </motion.div>
-    )
+    );
 }

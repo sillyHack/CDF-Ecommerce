@@ -10,12 +10,12 @@ import OrderAnimation from "./OrderAnimation"
 import { useThemeStore } from "@/store"
 
 // when we wanna fetch smth from the client with process.env, we have to prefix the variable with NEXT_PUBLIC
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export default function Checkout(){
-    const cartStore = useCartStore()
-    const router = useRouter()
-    const [clientSecret, setClientSecret] = useState("") // the client secret is used to authorize a payment 
+    const cartStore = useCartStore();
+    const router = useRouter();
+    const [clientSecret, setClientSecret] = useState(""); // the client secret is used to authorize a payment 
 
     useLayoutEffect(() => {
         // create a payment intent as soon as the page loads up
@@ -33,21 +33,23 @@ export default function Checkout(){
             }
             return res.json()
         }).then((data) => {
+            // if ok, we set the client secret
             setClientSecret(data.paymentIntent.client_secret)
             cartStore.setPaymentIntent(data.paymentIntent.id)
         })
-    }, [])
+    }, []);
 
     // theme store
-    const themeStore = useThemeStore()
+    const themeStore = useThemeStore();
 
+    // stripe options
     const options: StripeElementsOptions = {
         clientSecret,
         appearance: {
             theme: themeStore.mode === "dark" ? "night" : "stripe",
             labels: "floating"
         }
-    }
+    };
 
     
 
@@ -64,5 +66,5 @@ export default function Checkout(){
                 </div>
             )}
         </div>
-    )
+    );
 }

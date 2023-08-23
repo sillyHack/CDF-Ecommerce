@@ -1,14 +1,14 @@
-"use client" // that's bcz we wanna implement interactivity with the UI like onclicklisteners...
+"use client"; // that's bcz we wanna implement interactivity with the UI like onclicklisteners...
 
-import { Session } from "next-auth"
-import { signIn, signOut } from "next-auth/react"
-import Image from "next/image"
-import Link from "next/link"
-import Cart from "./Cart"
-import { useCartStore } from "@/store"
-import {AiFillShopping} from "react-icons/ai"
-import { motion, AnimatePresence } from "framer-motion"
-import DarkLight from "./DarkLight"
+import { Session } from "next-auth";
+import { signIn, signOut } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import Cart from "./Cart";
+import { useCartStore } from "@/store";
+import {AiFillShopping} from "react-icons/ai";
+import { motion, AnimatePresence } from "framer-motion";
+import DarkLight from "./DarkLight";
 
 export default function Nav({user} : Session) { // we are saying the user here has a type of Session
     const cartStore = useCartStore()
@@ -35,7 +35,7 @@ export default function Nav({user} : Session) { // we are saying the user here h
                         <button className="bg-primary text-white py-2 px-4 rounded-md hover:bg-pink-500 transition" onClick={() => signIn()}>Se connecter</button>
                     </li>
                 )}
-                {/* If the use is signed in */}
+                {/* If the user is signed in */}
                 {user && (
                     <li>
                         <div className="dropdown dropdown-end cursor-pointer">
@@ -83,5 +83,5 @@ export default function Nav({user} : Session) { // we are saying the user here h
                 {cartStore.isOpen && <Cart />}
             </AnimatePresence>
         </nav>
-    )
+    );
 }

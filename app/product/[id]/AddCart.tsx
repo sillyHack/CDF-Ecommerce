@@ -1,9 +1,15 @@
-"use client"
+"use client";
 
-import { useCartStore } from "@/store"
-import { AddCartType } from "@/types/AddCartType"
+import { useCartStore } from "@/store";
+import { AddCartType } from "@/types/AddCartType";
 import { useState } from "react";
 
+/**
+ * The button that will add a product to the cart
+ * 
+ * @param productObject the product to add
+ * @returns the button component
+ */
 export default function AddCart({name, id, image, unit_amount, quantity}: AddCartType){
     const cartStore = useCartStore();
     const [added, setAdded] = useState(false);

@@ -1,7 +1,7 @@
-import { ProductType } from "@/types/ProductType"
-import formatPrice from "@/util/PriceFormat"
-import Image from "next/image"
-import Link from "next/link"
+import { ProductType } from "@/types/ProductType";
+import formatPrice from "@/util/PriceFormat";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Product({id, name, unit_amount, image, description, metadata} : ProductType){
     const {features} = metadata;
@@ -16,5 +16,5 @@ export default function Product({id, name, unit_amount, image, description, meta
                 </div>
             </div>
         </Link>
-    )
+    );
 }

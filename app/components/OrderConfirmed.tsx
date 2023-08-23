@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
-import congrats from "@/public/congrats.gif"
-import Link from "next/link"
-import { useCartStore } from "@/store"
-import {useEffect} from "react"
+import { motion } from "framer-motion";
+import Image from "next/image";
+import congrats from "@/public/congrats.gif";
+import Link from "next/link";
+import { useCartStore } from "@/store";
+import {useEffect} from "react";
 
 export default function OrderConfirmed(){
-    const cartStore = useCartStore()
+    const cartStore = useCartStore();
 
     // when this component loads, we set the payment intent to nothing and we clear the cart
     useEffect(() => {
         cartStore.setPaymentIntent("")
         cartStore.clearCart()
-    }, [])
+    }, []);
 
     // close the cart and go to cart part of the checkout process
     const checkoutOrder = () => {
         setTimeout(() => {
             cartStore.setOnCheckout("cart")
-        }, 1000)
-        cartStore.toggleCart()
-    }
+        }, 1000);
+        cartStore.toggleCart();
+    };
 
     return(
         <motion.div
@@ -42,5 +42,5 @@ export default function OrderConfirmed(){
             </div>
             
         </motion.div>
-    )
+    );
 }
